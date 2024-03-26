@@ -1,6 +1,6 @@
 import ShowTableDiscrete from "../utils/ShowTableDiscrete";
 
-const BinomialDistCheck = ({_p, _alpha, xi, ni}) => {
+const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
 
     let s = 0;
     const m = xi[xi.length-1];
@@ -196,6 +196,29 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni}) => {
         }
     }
 
+    const getXEmp = () => {
+        let r = newNpiNpi.length - 1;
+        //alert(npi.length);
+        let sum = 0;
+
+        for (let i = 0; i < r+1; i++) {
+            //alert(newNiNpi[i]);
+            sum += (newNiNpi[i] - newNpi[i])**2/newNpi[i];
+        }
+
+        return sum;
+    }
+
+    const getXCryt = () => {
+        let r = newNpiNpi.length - 1;
+        // alert(r);
+
+        let df = r-s;
+
+        return chiSquaredTable[df][_alpha];
+        
+    }
+
     if (!_p) {
         s++;
     }
@@ -233,6 +256,20 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni}) => {
             <br />
             <p>After fix npi:</p>
             <ShowTableDiscrete xi={newXiNpi} ni={newNiNpi} pi={newPiNpi} npi={newNpiNpi} />
+
+            <br />
+            <br />
+            <p>X emp: </p>
+            {getXEmp()}
+
+            <br />
+            <br />
+            <p>X cryt: </p>
+            {getXCryt()}
+
+            <div>
+                {(getXEmp() < getXCryt()) ? (<p>Гіпотеза прийнята</p>) : (<p>Гіпотеза не прийнята</p>)}
+            </div>
         </div>
      );
 }
