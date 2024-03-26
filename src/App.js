@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import BarChart from './charts/BarChart';
 import NormalDistCheck from './distributionsCheks/NormalDistCheck';
@@ -67,13 +68,77 @@ const statData = {
 }
 
 function App() {
+  const [showResults, setShowResults] = useState(false);
+  const [alpha, setAlpha] = useState(null);
+  const [a, setA] = useState(null);
+  const [sigma, setSigma] = useState(null);
+  const [selectedLaw, setSelectedLaw] = useState(null);
+
+  const handleCheckClick = (e) => {
+    e.preventDefault();
+
+    setShowResults(true);
+  }
+
+  const handleAlphaChange = (e) => {
+    setAlpha(e.target.value);
+  }
+
+  const handleAChange = (e) => {
+    setA(e.target.value);
+  }
+
+  const handleSigmaChange = (e) => {
+    setSigma(e.target.value);
+  }
+
+  const handleSelectedLaw = (e) => {
+    setSelectedLaw(e.target.value);
+  }
+
   return (
     <div className="App">
-      <div className='bar-container'>
-        <BarChart data={statData} />
-      </div>
+      <select name='select-law' value={selectedLaw} onChange={handleSelectedLaw}>
+            <option value="">Оберіть закон</option>
+            <option value="normal">Нормальний закон</option>
+            <option value="exponential">Показниковий закон</option>
+          </select>
+      { selectedLaw === 'normal' && <div className='normal-law-container'>
+        <form>
+          
+        <div className='a-container'>
+          <p>Введіть a</p>
+          <input value={a}
+          onChange={handleAChange}></input>
+        </div>
+
+        <div className='sigma-container'>
+          <p>Введіть σ</p>
+          <input value={sigma}
+          onChange={handleSigmaChange}></input>
+        </div>
+
+        <div className='alpha-container'>
+          <p>Введіть α</p>
+          <input value={alpha}
+          onChange={handleAlphaChange}></input>
+        </div>
+        
+        <button onClick={handleCheckClick} type='submit'>Перевірити</button>
+        </form>
+        
+        {showResults &&
+        <div className='result-container'>
+          <div className='bar-container'>
+            <BarChart data={statData} />
+          </div>
+          
+          <NormalDistCheck _a={a} _sigma={sigma} _alpha={alpha}  intervals={intervals} ni={ni} chiSquaredTable = {chiSquaredTable} />
+        </div>
+        }
+      </div>}
       
-      <NormalDistCheck alpha={0.05} intervals={intervals} ni={ni} chiSquaredTable = {chiSquaredTable} />
+      
     </div>
   );
 }

@@ -4,7 +4,7 @@ import ShowTableContinious from "../utils/ShowTableContinious";
 
 
 
-const NormalDistCheck = ({a, sigma, intervals, ni, alpha, chiSquaredTable}) => {
+const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) => {
 
     const laplaceTable = [
         { x: 0, phi: 0 },
@@ -268,10 +268,10 @@ const NormalDistCheck = ({a, sigma, intervals, ni, alpha, chiSquaredTable}) => {
       ];
 
     let s = 0;
-    if (!a) {
+    if (!_a) {
         s++;
     }
-    if (!sigma) {
+    if (!_sigma) {
         s++;
     }
     //alert(s);
@@ -366,7 +366,7 @@ const NormalDistCheck = ({a, sigma, intervals, ni, alpha, chiSquaredTable}) => {
 
     const getSigma = (intervals, ni) => {
         let n = ni.reduce((sum, curr) => sum + curr, 0);
-        let a = getA(intervals, ni);
+        let a = (!_a) ? getA(intervals, ni) : _a;
         let xi = getXi(intervals);
         let sum = 0;
         
@@ -388,9 +388,9 @@ const NormalDistCheck = ({a, sigma, intervals, ni, alpha, chiSquaredTable}) => {
     }
 
     const setPi = (intervals, ni) => {
-        let a = getA(intervals, ni);
+        let a = (!_a) ? getA(intervals, ni) : _a;
         
-        let sigma = getSigma(intervals, ni);
+        let sigma = (!_sigma) ? getSigma(intervals, ni) : _sigma;
         // alert(sigma);
 
         let phi = getPhi((intervals[0][1] - a) / sigma);
@@ -491,13 +491,13 @@ const NormalDistCheck = ({a, sigma, intervals, ni, alpha, chiSquaredTable}) => {
         return sum;
     }
 
-    const getXCryt = (alpha, s) => {
+    const getXCryt = (s) => {
         let r = newNpi.length - 1;
-        alert(r);
+        // alert(r);
 
         let df = r-s;
 
-        return chiSquaredTable[df][alpha];
+        return chiSquaredTable[df][_alpha];
         
     }
 
@@ -509,11 +509,11 @@ const NormalDistCheck = ({a, sigma, intervals, ni, alpha, chiSquaredTable}) => {
             {newIntervalsNpi = [...newIntervals]}
             <ShowTableContinious intervals={newIntervals} ni={newNi} />
             <div>
-                a: {getA(newIntervals, newNi)}
+                a: {(!_a) ? getA(newIntervals, newNi) : _a}
             </div>
 
             <div>
-                sigma: {getSigma(newIntervals, newNi)}
+                sigma: {(!_sigma) ? getSigma(newIntervals, newNi) : _sigma}
             </div>
             
             <div>
@@ -542,7 +542,7 @@ const NormalDistCheck = ({a, sigma, intervals, ni, alpha, chiSquaredTable}) => {
             </div>
 
             <div>
-                X cryt: {getXCryt(alpha, s)}
+                X cryt: {getXCryt(s)}
             </div>
         </div>
      );
