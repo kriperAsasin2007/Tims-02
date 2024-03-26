@@ -1,11 +1,10 @@
-import { useState } from "react";
 import ShowTableContinious from "../utils/ShowTableContinious";
 
 
 
 
 
-const NormalDistCheck = ({a, sigma, intervals, ni}) => {
+const NormalDistCheck = ({a, sigma, intervals, ni, alpha, chiSquaredTable}) => {
 
     const laplaceTable = [
         { x: 0, phi: 0 },
@@ -268,15 +267,33 @@ const NormalDistCheck = ({a, sigma, intervals, ni}) => {
         { x: 5, phi: 0.499997 }
       ];
 
-    // Create copies of the arrays
+    let s = 0;
+    if (!a) {
+        s++;
+    }
+    if (!sigma) {
+        s++;
+    }
+    //alert(s);
+    
+    // Create copies for the ni refactoring
     const newIntervals = [...intervals];
     const newNi = [...ni];
+
     const pi = [];
     const npi = [];
+
+    // Create copies for the npi refactoring
+    
+    let newIntervalsNpi = [...newIntervals];
+    let newNiNpi = [...newNi];
+    let newPi = [];
+    let newNpi = [...npi];
 
 
     const checkNi = (ni) => {
         let toReturn;
+        // alert(ni.length);
         for (let i = 0; i < ni.length; i++) {
             if(ni[i] < 5) {
                 toReturn = i;
@@ -372,9 +389,12 @@ const NormalDistCheck = ({a, sigma, intervals, ni}) => {
 
     const setPi = (intervals, ni) => {
         let a = getA(intervals, ni);
+        
         let sigma = getSigma(intervals, ni);
+        // alert(sigma);
 
         let phi = getPhi((intervals[0][1] - a) / sigma);
+        // alert(phi)
         pi.push(phi + 0.5);
 
         for (let i = 1; i < ni.length - 1; i++) {
@@ -385,21 +405,108 @@ const NormalDistCheck = ({a, sigma, intervals, ni}) => {
 
         let sum = pi.reduce((sum, curr) => sum + curr, 0);
         pi.push(1 - sum);
+
+        
     }
 
     const setNpi = (pi, ni) => {
         let n = ni.reduce((sum, curr) => sum + curr, 0);
         for (let i = 0; i < pi.length; i++) {
             npi.push(pi[i] * n);
+            //newNpi.push(npi[i]);
         }
     }
 
-    
+
+    const checkNpi = (npi) => {
+        let toReturn;
+        for (let i = 0; i < npi.length; i++) {
+            if(npi[i] < 10) {
+                toReturn = i;
+            }
+            
+        }
+        return toReturn;
+    }
+
+    const fixNpi = () => {
+        let index = checkNpi(npi);
+
+        while(index !== undefined) {
+            let tempH = newIntervalsNpi[index];
+            let tempN = newNiNpi[index];
+            let tempPi = newPi[index];
+            let tempNpi = newNpi[index];
+
+
+            
+
+            // Splice the copied arrays
+            newIntervalsNpi.splice(index, 1);
+            newNiNpi.splice(index, 1);
+            newPi.splice(index, 1);
+            newNpi.splice(index,1);
+
+            
+
+            if(index !== 0) {
+                
+                newIntervalsNpi[index - 1][1] = tempH[1];
+
+                newNiNpi[index - 1] += tempN;
+
+                newPi[index - 1] += tempPi;
+
+                newNpi[index - 1] += tempNpi;
+            }
+            else {
+
+                newIntervalsNpi[index][0] = tempH[0];
+
+                newNiNpi[index] += tempN;
+
+                newPi[index] += tempPi;
+
+                newNpi[index] += tempNpi;
+            }
+
+            // alert(`interval[1]: ${newIntervals[index][1]}`);
+            index = checkNpi(newNpi);
+
+            
+            // alert(`index: ${index}`);
+        }
+    }
+
+    const getXEmp = () => {
+        let r = newNpi.length - 1;
+        //alert(npi.length);
+        let sum = 0;
+
+        for (let i = 0; i < r+1; i++) {
+            //alert(newNiNpi[i]);
+            sum += (newNiNpi[i] - newNpi[i])**2/newNpi[i];
+        }
+
+        return sum;
+    }
+
+    const getXCryt = (alpha, s) => {
+        let r = newNpi.length - 1;
+        alert(r);
+
+        let df = r-s;
+
+        return chiSquaredTable[df][alpha];
+        
+    }
 
     return ( 
         <div className='normal-dist-container'>
             <ShowTableContinious intervals={intervals} ni={ni} />
             {fixNi(ni)}
+            {newNiNpi = [...newNi]}
+            {newIntervalsNpi = [...newIntervals]}
             <ShowTableContinious intervals={newIntervals} ni={newNi} />
             <div>
                 a: {getA(newIntervals, newNi)}
@@ -415,11 +522,28 @@ const NormalDistCheck = ({a, sigma, intervals, ni}) => {
 
             <div>
                 pi : {setPi(newIntervals, newNi)}
-                {pi[0]}
+                <ShowTableContinious intervals={newIntervals} ni={newNi} pi={pi}/>
+                {newPi = [...pi]}
             </div>
             {setNpi(pi, newNi)}
+            {newNpi = [...npi]}
 
-            <ShowTableContinious intervals={newIntervals} ni={newNi} pi={pi} npi={npi}/>
+             <ShowTableContinious intervals={newIntervals} ni={newNi} pi={pi} npi={npi}/>
+             
+            {fixNpi()}
+
+            <br />
+            <br />
+            <br />
+            <ShowTableContinious intervals={newIntervalsNpi} ni={newNiNpi} pi={newPi} npi={newNpi}/>
+
+            <div>
+                X epm: {getXEmp()}
+            </div>
+
+            <div>
+                X cryt: {getXCryt(alpha, s)}
+            </div>
         </div>
      );
 }

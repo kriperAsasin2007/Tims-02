@@ -21,10 +21,10 @@ const ShowTableContinious = ({intervals, ni, pi, npi}) => {
                     ))}
                 </tr>}
 
-                {npi && <tr>
+                {npi && <tr className='npi'>
                     <th>npi</th>
                     {npi.map(npi => (
-                        <td>{npi}</td>
+                        <td className='item'>{npi}</td>
                     ))}
                 </tr>}
             </table>
