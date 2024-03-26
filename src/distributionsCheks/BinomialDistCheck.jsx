@@ -224,17 +224,20 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
     }
     return ( 
         <div className='binomial-dist-check-container'>
+            <h3>Початкова таблиця: </h3>
             <ShowTableDiscrete xi={xi} ni={ni} />
             {setPi()}
             {newPi = [...pi]}
             <br />
             <br />
+            <h3>Знаходимо pi: </h3>
             <ShowTableDiscrete xi={xi} ni={ni} pi={pi} />
             {setNpi()}
             {newNpi = [...npi]}
             <br />
             <br />
 
+            <h3>Знаходимо npi: </h3>
             <ShowTableDiscrete xi={xi} ni={ni} pi={pi} npi={npi} />
 
             {fixNi(ni)}
@@ -247,28 +250,32 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
 
             <br />
             <br />
-            <p>After fix ni:</p>
+            <h3>Таблиця після об'єднання ni: </h3>
             <ShowTableDiscrete xi={newXi} ni={newNi} pi={newPi} npi={newNpi} />
 
             {fixNpi()}
 
             <br />
             <br />
-            <p>After fix npi:</p>
+            <h3>Остаточна таблиця: </h3>
             <ShowTableDiscrete xi={newXiNpi} ni={newNiNpi} pi={newPiNpi} npi={newNpiNpi} />
 
             <br />
             <br />
-            <p>X emp: </p>
+            <h5>X емп: </h5>
+            {getXEmp()}
+            <br />
+            <br />
+            <h4>X емп: </h4>
             {getXEmp()}
 
             <br />
             <br />
-            <p>X cryt: </p>
+            <h4>X крит: </h4>
             {getXCryt()}
 
             <div>
-                {(getXEmp() < getXCryt()) ? (<p>Гіпотеза прийнята</p>) : (<p>Гіпотеза не прийнята</p>)}
+                {(getXEmp() < getXCryt()) ? (<h3>Гіпотеза прийнята</h3>) : (<h3>Гіпотеза не прийнята</h3>)}
             </div>
         </div>
      );

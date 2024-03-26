@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import '../styles/normal.css'
 
 import BarChart from '../charts/BarChart';
 import NormalDistCheck from '../distributionsCheks/NormalDistCheck';
+import task1 from '../data/task1.json';
 
 const chiSquaredTable = {
     1: { 0.01: 6.6, 0.025: 5.0, 0.05: 3.8, 0.95: 0.0039, 0.975: 0.00098, 0.99: 0.00016 },
@@ -36,6 +38,8 @@ const chiSquaredTable = {
     30: { 0.01: 50.9, 0.025: 47.0, 0.05: 43.8, 0.95: 18.5, 0.975: 16.8, 0.99: 15.0 },
   };
 
+const {intervals, ni} = task1;
+
   // Нормальний зошит
 
 // const intervals = [[90,94], [94,98], [98,102], [102,106], [106,110]];
@@ -48,8 +52,13 @@ const chiSquaredTable = {
 
 // Нормальний перша задача лаба
 
-const intervals = [[28,30], [30,32], [32,34], [34,36], [36,38], [38,40], [40,42], [42,44], [44,46], [46,48]];
-const ni = [1,2,12,51,82,85,48,15,3,1];
+// const intervals = [[28,30], [30,32], [32,34], [34,36], [36,38], [38,40], [40,42], [42,44], [44,46], [46,48]];
+// const ni = [1,2,12,51,82,85,48,15,3,1];
+
+// Check Nazar
+
+// const intervals = [[28, 30], [30, 32], [32, 34], [34, 36], [36, 38], [38, 40], [40, 42], [42, 44], [44, 46], [46, 48]];
+// const ni = [1, 2, 10, 48, 88, 91, 45, 13, 3, 1];
 
 
 // Перевірка Павла
@@ -62,7 +71,7 @@ const intervalsStr = intervals.map(interval => `${interval[0].toString()} - ${in
 const statData = {
   labels: intervalsStr,
   datasets: [{
-    label: 'Графік розподілу',
+    label: 'Гістограма частот',
     data: ni,
   }]
 }
@@ -93,28 +102,28 @@ const NormalDistForm = () => {
 
     return ( 
         <div className="normal-dist-form-container">
-            <form>
+            <form className='normal-dist-form'>
           
-            <div className='a-container'>
-                <p>Введіть a</p>
-                <input value={a}
-                onChange={handleAChange}></input>
-            </div>
-    
-            <div className='sigma-container'>
-                <p>Введіть σ</p>
-                <input value={sigma}
-                onChange={handleSigmaChange}></input>
-            </div>
-    
-            <div className='alpha-container'>
-                <p>Введіть α</p>
-                <input value={alpha}
-                onChange={handleAlphaChange}></input>
-            </div>
-            
-            <button onClick={handleCheckClick} type='submit'>Перевірити</button>
-          </form>
+                <div className='a-container'>
+                    <p>Введіть a</p>
+                    <input value={a}
+                    onChange={handleAChange}></input>
+                </div>
+        
+                <div className='sigma-container'>
+                    <p>Введіть σ</p>
+                    <input value={sigma}
+                    onChange={handleSigmaChange}></input>
+                </div>
+        
+                <div className='alpha-container'>
+                    <p>Введіть α</p>
+                    <input value={alpha}
+                    onChange={handleAlphaChange}></input>
+                </div>
+                
+                <button className='submit-btn' onClick={handleCheckClick} type='submit'>Перевірити</button>
+            </form>
           {showResults &&
             <div className='result-container'>
                 <div className='bar-container'>

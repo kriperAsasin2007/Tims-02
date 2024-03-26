@@ -1,0 +1,25 @@
+.discrete-table {
+    /* width: 100%;*/
+    border-collapse: collapse; /* Collapse table borders */
+    border: solid; /* Add border around the table */
+    
+}
+
+.discrete-table-container th{
+    border: solid;
+}
+
+.discrete-table-container td{
+    border: solid;
+}
+
+.binomial-dist-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.binomial-dist-form .submit-btn {
+    margin-top: 15px;
+}

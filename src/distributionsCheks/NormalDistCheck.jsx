@@ -503,11 +503,15 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
 
     return ( 
         <div className='normal-dist-check-container'>
+            <h3>Початкова таблиця: </h3>
             <ShowTableContinious intervals={intervals} ni={ni} />
             {fixNi(ni)}
             {newNiNpi = [...newNi]}
             {newIntervalsNpi = [...newIntervals]}
+
+            <h3>Таблиця після об'єднання по ni: </h3>
             <ShowTableContinious intervals={newIntervals} ni={newNi} />
+            
             <div>
                 a: {(!_a) ? getA(newIntervals, newNi) : _a}
             </div>
@@ -515,19 +519,19 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
             <div>
                 sigma: {(!_sigma) ? getSigma(newIntervals, newNi) : _sigma}
             </div>
-            
-            <div>
-                laplace : {getPhi(-0.52)}
-            </div>
+        
 
             <div>
-                pi : {setPi(newIntervals, newNi)}
+                {setPi(newIntervals, newNi)}
+                <h3>Знаходимо pi: </h3>
                 <ShowTableContinious intervals={newIntervals} ni={newNi} pi={pi}/>
                 {newPi = [...pi]}
             </div>
             {setNpi(pi, newNi)}
             {newNpi = [...npi]}
 
+
+            <h3>Знаходимо npi: </h3>
              <ShowTableContinious intervals={newIntervals} ni={newNi} pi={pi} npi={npi}/>
              
             {fixNpi()}
@@ -535,18 +539,19 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
             <br />
             <br />
             <br />
+            <h3>Остаточна таблиця: </h3>
             <ShowTableContinious intervals={newIntervalsNpi} ni={newNiNpi} pi={newPi} npi={newNpi}/>
 
             <div>
-                X epm: {getXEmp()}
+                X емп: {getXEmp()}
             </div>
 
             <div>
-                X cryt: {getXCryt(s)}
+                X крит: {getXCryt(s)}
             </div>
 
             <div>
-                {(getXEmp() < getXCryt(s)) ? (<p>Гіпотеза прийнята</p>) : (<p>Гіпотеза не прийнята</p>)}
+                {(getXEmp() < getXCryt(s)) ? (<h4>Гіпотеза прийнята</h4>) : (<h4>Гіпотеза не прийнята</h4>)}
             </div>
         </div>
      );

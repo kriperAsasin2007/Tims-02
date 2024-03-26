@@ -2,14 +2,24 @@ import { useState } from "react";
 import BarChart from "../charts/BarChart";
 import BinomialDistCheck from "../distributionsCheks/BinomialDistCheck";
 
+import task2 from '../data/task2.json';
+
+import '../styles/binomial.css'
+
+const {xi, ni} = task2;
+
 // Мій варік 2 завд
 
 // const xi = [0,1,2,3,4,5,6,7,8];
 // const ni = [0,3,10,49,136,259,295,201,51];
 
 // З пари біноміальний
-const xi = [0,1,2,3,4,5,6,7];
-const ni = [4,23,31,23,11,5,2,1];
+// const xi = [0,1,2,3,4,5,6,7];
+// const ni = [4,23,31,23,11,5,2,1];
+
+// Check Nazar
+// const xi = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+// const ni = [0, 3, 9, 47, 140, 263, 289, 198, 52];
 
 const chiSquaredTable = {
     1: { 0.01: 6.6, 0.025: 5.0, 0.05: 3.8, 0.95: 0.0039, 0.975: 0.00098, 0.99: 0.00016 },
@@ -47,7 +57,7 @@ const chiSquaredTable = {
 const statData = {
     labels: xi,
     datasets: [{
-      label: 'Графік розподілу',
+      label: 'Гістограма частот',
       data: ni,
     }]
   }
@@ -74,7 +84,7 @@ const BinomialDistForm = () => {
 
     return ( 
         <div className='binomial-dist-form-container'>
-            <form>
+            <form className="binomial-dist-form">
           
                 <div className='p-container'>
                     <p>Введіть p</p>
@@ -88,7 +98,7 @@ const BinomialDistForm = () => {
                     onChange={handleAlphaChange}></input>
                 </div>
                 
-                <button onClick={handleCheckClick} type='submit'>Перевірити</button>
+                <button className="submit-btn" onClick={handleCheckClick} type='submit'>Перевірити</button>
             </form>
 
             {showResults &&

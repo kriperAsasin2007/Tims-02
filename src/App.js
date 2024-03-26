@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './App.css';
+// import './App.css';
 import NormalDistForm from './forms/NormalDistForm';
 import BinomialDistForm from './forms/BinomialDistForm';
 
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="App">
-      <select name='select-law' value={selectedLaw} onChange={handleSelectedLaw}>
+      <select className='select-law' name='select-law' value={selectedLaw} onChange={handleSelectedLaw}>
             <option value="">Оберіть закон</option>
             <option value="normal">Нормальний закон</option>
             <option value="binomial">Біноміальний закон</option>

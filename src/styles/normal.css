@@ -1,0 +1,30 @@
+.continious-table {
+    /* width: 100%;*/
+    border-collapse: collapse; /* Collapse table borders */
+    border: solid; /* Add border around the table */
+    
+}
+
+/* .continious-table-container tr {
+    display: flex;
+    justify-content: center;
+} */
+
+.continious-table-container th{
+    border: solid;
+}
+
+.continious-table-container td{
+    border: solid;
+}
+
+.normal-dist-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.normal-dist-form .submit-btn {
+    margin-top: 15px;
+}

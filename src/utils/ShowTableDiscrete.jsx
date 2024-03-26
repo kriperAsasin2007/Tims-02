@@ -1,7 +1,9 @@
+import '../styles/binomial.css'
+
 const ShowTableDiscrete = ({xi, ni, pi, npi}) => {
     return ( 
         <div className='discrete-table-container'>
-            <table>
+            <table className="discrete-table">
                 <tr>
                     <th>xi</th>
                     {xi.map(num => (
