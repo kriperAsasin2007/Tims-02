@@ -77,7 +77,7 @@ const NormalDistForm = () => {
         e.preventDefault();
     
         setShowResults(true);
-      }
+    }
     
     const handleAlphaChange = (e) => {
     setAlpha(e.target.value);
@@ -117,13 +117,13 @@ const NormalDistForm = () => {
           </form>
           {showResults &&
             <div className='result-container'>
-            <div className='bar-container'>
-                <BarChart data={statData} />
+                <div className='bar-container'>
+                    <BarChart data={statData} />
+                </div>
+                
+                <NormalDistCheck _a={a} _sigma={sigma} _alpha={alpha}  intervals={intervals} ni={ni} chiSquaredTable = {chiSquaredTable} />
             </div>
-            
-            <NormalDistCheck _a={a} _sigma={sigma} _alpha={alpha}  intervals={intervals} ni={ni} chiSquaredTable = {chiSquaredTable} />
-            </div>
-        }
+            }
         </div>
      );
 }

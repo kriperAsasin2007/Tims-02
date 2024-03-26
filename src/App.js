@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import NormalDistForm from './forms/NormalDistForm';
+import BinomialDistForm from './forms/BinomialDistForm';
 
 
 
@@ -21,10 +22,14 @@ function App() {
       <select name='select-law' value={selectedLaw} onChange={handleSelectedLaw}>
             <option value="">Оберіть закон</option>
             <option value="normal">Нормальний закон</option>
-            <option value="exponential">Показниковий закон</option>
+            <option value="binomial">Біноміальний закон</option>
           </select>
       { selectedLaw === 'normal' && <div className='normal-law-container'>
         <NormalDistForm />
+      </div>}
+
+      { selectedLaw === 'binomial' && <div className='binomial-law-container'>
+        <BinomialDistForm />
       </div>}
       
       

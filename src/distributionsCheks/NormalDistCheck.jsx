@@ -502,7 +502,7 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
     }
 
     return ( 
-        <div className='normal-dist-container'>
+        <div className='normal-dist-check-container'>
             <ShowTableContinious intervals={intervals} ni={ni} />
             {fixNi(ni)}
             {newNiNpi = [...newNi]}
