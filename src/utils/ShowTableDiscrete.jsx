@@ -1,4 +1,4 @@
-const ShowTableDiscrete = ({}) => {
+const ShowTableDiscrete = () => {
     return ( 
         <div className='discrete-table-container'>
 
