@@ -1,23 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import NormalDistCheck from './distributionsCheks/NormalDistCheck';
+
+const intervals = [[90,94], [94,98], [98,102], [102,106], [106,110]];
+const ni = [4,24,30,30,12];
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <NormalDistCheck a={1} sigma={2} intervals={intervals} ni={ni} />
     </div>
   );
 }
