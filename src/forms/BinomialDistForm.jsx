@@ -2,8 +2,14 @@ import { useState } from "react";
 import BarChart from "../charts/BarChart";
 import BinomialDistCheck from "../distributionsCheks/BinomialDistCheck";
 
-const xi = [0,1,2,3,4,5,6,7,8];
-const ni = [0,3,10,49,136,259,295,201,51];
+// Мій варік 2 завд
+
+// const xi = [0,1,2,3,4,5,6,7,8];
+// const ni = [0,3,10,49,136,259,295,201,51];
+
+// З пари біноміальний
+const xi = [0,1,2,3,4,5,6,7];
+const ni = [4,23,31,23,11,5,2,1];
 
 const statData = {
     labels: xi,
@@ -58,7 +64,7 @@ const BinomialDistForm = () => {
                     <BarChart data={statData} />
                 </div>
                 
-                <BinomialDistCheck xi={xi} ni={ni} />
+                <BinomialDistCheck _p={p} xi={xi} ni={ni} />
             </div>
             }
         </div>

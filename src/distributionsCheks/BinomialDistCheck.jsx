@@ -26,6 +26,7 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni}) => {
         }
         let xAvg = sum / n;
 
+
         return xAvg / m;
     }
 
@@ -46,8 +47,10 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni}) => {
     }
 
     const setPi = () => {
-        let p = getP();
+        let p = (!_p) ? getP() : _p;
         let q = 1 - p;
+
+        alert(p);
         
         for (let i = 0; i < xi.length; i++) {
             pi.push(getC(m, i) * p**i * q**(m-i));
@@ -60,6 +63,9 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni}) => {
     return ( 
         <div className='binomial-dist-check-container'>
             <ShowTableDiscrete xi={xi} ni={ni} />
+            {setPi()}
+
+            <ShowTableDiscrete xi={xi} ni={ni} pi={pi} />
         </div>
      );
 }
