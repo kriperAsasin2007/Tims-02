@@ -272,6 +272,7 @@ const NormalDistCheck = ({a, sigma, intervals, ni}) => {
     const newIntervals = [...intervals];
     const newNi = [...ni];
     const pi = [];
+    const npi = [];
 
 
     const checkNi = (ni) => {
@@ -386,9 +387,14 @@ const NormalDistCheck = ({a, sigma, intervals, ni}) => {
         pi.push(1 - sum);
     }
 
-    // const testPi = () => {
-    //     pi.push(1);
-    // }
+    const setNpi = (pi, ni) => {
+        let n = ni.reduce((sum, curr) => sum + curr, 0);
+        for (let i = 0; i < pi.length; i++) {
+            npi.push(pi[i] * n);
+        }
+    }
+
+    
 
     return ( 
         <div className='normal-dist-container'>
@@ -411,6 +417,9 @@ const NormalDistCheck = ({a, sigma, intervals, ni}) => {
                 pi : {setPi(newIntervals, newNi)}
                 {pi[0]}
             </div>
+            {setNpi(pi, newNi)}
+
+            <ShowTableContinious intervals={newIntervals} ni={newNi} pi={pi} npi={npi}/>
         </div>
      );
 }

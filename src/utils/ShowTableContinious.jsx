@@ -1,4 +1,4 @@
-const ShowTableContinious = ({intervals, ni}) => {
+const ShowTableContinious = ({intervals, ni, pi, npi}) => {
     return ( 
         <div className='continious-table-container'>
             <table>
@@ -14,6 +14,19 @@ const ShowTableContinious = ({intervals, ni}) => {
                         <td>{num}</td>
                     ))}
                 </tr>
+                {pi && <tr>
+                    <th>pi</th>
+                    {pi.map(pi => (
+                        <td>{pi}</td>
+                    ))}
+                </tr>}
+
+                {npi && <tr>
+                    <th>npi</th>
+                    {npi.map(npi => (
+                        <td>{npi}</td>
+                    ))}
+                </tr>}
             </table>
         </div>
      );
