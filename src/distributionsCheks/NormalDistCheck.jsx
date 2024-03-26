@@ -544,6 +544,10 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
             <div>
                 X cryt: {getXCryt(s)}
             </div>
+
+            <div>
+                {(getXEmp() < getXCryt(s)) ? (<p>Гіпотеза прийнята</p>) : (<p>Гіпотеза не прийнята</p>)}
+            </div>
         </div>
      );
 }
