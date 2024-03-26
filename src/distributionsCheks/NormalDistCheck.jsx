@@ -66,11 +66,51 @@ const NormalDistCheck = ({a, sigma, intervals, ni}) => {
 
         
     }
+
+    const getXi = (intervals) => {
+        let intervalsCopy = [...intervals]
+        return intervalsCopy.map(interval => (interval[0] + interval[1])/2);
+    }
+
+    const getA = (intervals, ni) => {
+        let n = ni.reduce((sum, curr) => sum + curr, 0);
+        let xi = getXi(intervals);
+
+        let sum = 0;
+        for (let i = 0; i < ni.length; i++) {
+            sum += ni[i] * xi[i];
+        }
+        return sum / n;
+
+    }
+
+    const getSigma = (intervals, ni) => {
+        let n = ni.reduce((sum, curr) => sum + curr, 0);
+        let a = getA(intervals, ni);
+        let xi = getXi(intervals);
+        let sum = 0;
+        
+
+        for (let i = 0; i < ni.length; i++) {
+            sum += ni[i] * (xi[i] - a)**2;
+        }
+        let D = sum / n;
+
+        return Math.sqrt(D);
+    }
+
     return ( 
         <div className='normal-dist-container'>
             <ShowTableContinious intervals={intervals} ni={ni} />
             {fixNi(ni)}
             <ShowTableContinious intervals={newIntervals} ni={newNi} />
+            <div>
+                a: {getA(newIntervals, newNi)}
+            </div>
+
+            <div>
+                sigma: {getSigma(newIntervals, newNi)}
+            </div>
             
         </div>
      );
