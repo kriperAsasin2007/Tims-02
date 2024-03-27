@@ -530,10 +530,6 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
              <ShowTableContinious intervals={newIntervals} ni={newNi} pi={pi} npi={npi}/>
              
             {fixNpi()}
-
-            <br />
-            <br />
-            <br />
             <h3>Остаточна таблиця: </h3>
             <ShowTableContinious intervals={newIntervalsNpi} ni={newNiNpi} pi={newPi} npi={newNpi}/>
 
