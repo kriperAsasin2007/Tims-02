@@ -262,8 +262,17 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
 
             <br />
             <br />
-            <h5>X емп: </h5>
-            {getXEmp()}
+            <h4>Параметр p: </h4>
+            {(!_p) ? getP() : _p}
+
+            <br />
+            <h4>Кількість невідомих s: </h4>
+            {s}
+
+            <br />
+            <h4>Рівень значущості α: </h4>
+            {_alpha}
+
             <br />
             <br />
             <h4>X емп: </h4>

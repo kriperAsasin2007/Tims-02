@@ -542,16 +542,29 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
             <h3>Остаточна таблиця: </h3>
             <ShowTableContinious intervals={newIntervalsNpi} ni={newNiNpi} pi={newPi} npi={newNpi}/>
 
-            <div>
+
+            <h4>
+                Параметр a: {(!_a) ? getA(newIntervals, newNi) : _a}
+            </h4>
+
+            <h4>
+                Параметр σ: {(!_sigma) ? getSigma(newIntervals, newNi) : _sigma}
+            </h4>
+
+            <h4>
+                Рівень значущості α: {_alpha}
+            </h4>
+
+            <h4>
                 X емп: {getXEmp()}
-            </div>
+            </h4>
 
-            <div>
+            <h4>
                 X крит: {getXCryt(s)}
-            </div>
+            </h4>
 
             <div>
-                {(getXEmp() < getXCryt(s)) ? (<h4>Гіпотеза прийнята</h4>) : (<h4>Гіпотеза не прийнята</h4>)}
+                {(getXEmp() < getXCryt(s)) ? (<h3>Гіпотеза прийнята</h3>) : (<h3>Гіпотеза не прийнята</h3>)}
             </div>
         </div>
      );
