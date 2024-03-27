@@ -90,15 +90,18 @@ const NormalDistForm = () => {
     }
     
     const handleAlphaChange = (e) => {
-    setAlpha(e.target.value);
+      setAlpha(e.target.value);
+      setShowResults(false);
     }
 
     const handleAChange = (e) => {
-    setA(e.target.value);
+      setA(e.target.value);
+      setShowResults(false);
     }
 
     const handleSigmaChange = (e) => {
-    setSigma(e.target.value);
+      setSigma(e.target.value);
+      setShowResults(false);
     }
 
     return ( 

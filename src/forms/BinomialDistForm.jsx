@@ -70,10 +70,12 @@ const BinomialDistForm = () => {
 
     const handleAlphaChange = (e) => {
         setAlpha(e.target.value);
+        setShowResults(false);
     }
 
     const handlePChange = (e) => {
         setP(e.target.value);
+        setShowResults(false);
     }
 
     const handleCheckClick = (e) => {
