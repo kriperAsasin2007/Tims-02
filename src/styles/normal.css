@@ -2,13 +2,9 @@
     /* width: 100%;*/
     border-collapse: collapse; /* Collapse table borders */
     border: solid; /* Add border around the table */
-    
+    /* border-radius: 20px; */
 }
 
-/* .continious-table-container tr {
-    display: flex;
-    justify-content: center;
-} */
 
 .continious-table-container th{
     border: solid;
