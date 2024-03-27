@@ -58,6 +58,7 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
         for (let i = 0; i < xi.length; i++) {
             pi.push(getC(m, i) * p**i * q**(m-i));
         }
+        newPi = Array.from(pi);
     }
 
     const setNpi = () => {
@@ -66,6 +67,8 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
         for (let i = 0; i < xi.length; i++) {
             npi.push(n * pi[i]);
         }
+
+        newNpi = [...npi];
     }
 
     const checkNi = (ni) => {
@@ -133,6 +136,10 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
             // alert(`index: ${index}`);
         }
 
+        newXiNpi = [...newXi];
+        newNiNpi = [...newNi];
+        newPiNpi = [...newPi];
+        newNpiNpi = [...newNpi];
         
     }
 
@@ -227,13 +234,15 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
             <h3>Початкова таблиця: </h3>
             <ShowTableDiscrete xi={xi} ni={ni} />
             {setPi()}
-            {newPi = [...pi]}
+            
+            
+            
             <br />
             <br />
             <h3>Знаходимо pi: </h3>
             <ShowTableDiscrete xi={xi} ni={ni} pi={pi} />
             {setNpi()}
-            {newNpi = [...npi]}
+            
             <br />
             <br />
 
@@ -242,10 +251,7 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
 
             {fixNi(ni)}
             
-            {newXiNpi = [...newXi]}
-            {newNiNpi = [...newNi]}
-            {newPiNpi = [...newPi]}
-            {newNpiNpi = [...newNpi]}
+            
             
 
             <br />
@@ -260,30 +266,35 @@ const BinomialDistCheck = ({_p, _alpha, xi, ni, chiSquaredTable}) => {
             <h3>Остаточна таблиця: </h3>
             <ShowTableDiscrete xi={newXiNpi} ni={newNiNpi} pi={newPiNpi} npi={newNpiNpi} />
 
-            <br />
-            <br />
-            <h4>Параметр p: </h4>
-            {(!_p) ? getP() : _p}
 
-            <br />
-            <h4>Кількість невідомих s: </h4>
-            {s}
+            <div className="params">
+                <div className="params-1">
+                    <h4>Параметр p: </h4>
+                    <p>{(!_p) ? getP() : _p}</p>
 
-            <br />
-            <h4>Рівень значущості α: </h4>
-            {_alpha}
+                    
+                    <h4>Кількість невідомих s: </h4>
+                    <p>{s}</p>
 
-            <br />
-            <br />
-            <h4>X емп: </h4>
-            {getXEmp()}
+                    
+                    <h4>Рівень значущості α: </h4>
+                    <p>{_alpha}</p>
+                </div>
+                
 
-            <br />
-            <br />
-            <h4>X крит: </h4>
-            {getXCryt()}
+                <div className="params-2">
+                    <h4>X емп: </h4>
+                    <p>{getXEmp()}</p>
 
-            <div>
+                    
+                    <h4>X крит: </h4>
+                    <p>{getXCryt()}</p>
+                </div>      
+            </div>
+                  
+            
+
+            <div className="conclusion">
                 {(getXEmp() < getXCryt()) ? (<h3>Гіпотеза прийнята</h3>) : (<h3>Гіпотеза не прийнята</h3>)}
             </div>
         </div>

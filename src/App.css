@@ -2,21 +2,58 @@
   margin-right: 20px;
 } */
 
-.bar-container {
+/* .bar-container {
   width: 800px;
-}
+} */
 
 
 .App {
   display: flex;
+  width: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* overflow: auto; */
   
-  border: solid;
 }
 
 .select-law {
   margin-top: 10%;
+  width: 30%;
+  align-self: center;
 }
+
+.bar-container {
+  align-self: center;
+  /* border: solid; */
+  width: 1500px;
+  display: flex;
+  justify-content: center;
+}
+
+.params {
+  display: flex;
+  flex-direction: column;
+}
+
+.params-1 {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.params-1 p{
+  margin-right: 30px;
+  margin-left: 5px;
+}
+
+.params-2 {
+  display: flex;
+  align-items: center;
+}
+
+.params-2 p{
+  margin-right: 30px;
+  margin-left: 5px;
+}
+
+/* .conclusion {
+  align-self: center;
+} */

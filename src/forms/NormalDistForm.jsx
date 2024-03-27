@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../styles/normal.css'
+// import '../App.css'
 
 import BarChart from '../charts/BarChart';
 import NormalDistCheck from '../distributionsCheks/NormalDistCheck';

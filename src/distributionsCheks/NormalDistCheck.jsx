@@ -343,7 +343,8 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
             
             // alert(`index: ${index}`);
         }
-
+        newNiNpi = [...newNi];
+        newIntervalsNpi = [...newIntervals];
         
     }
 
@@ -406,6 +407,7 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
         let sum = pi.reduce((sum, curr) => sum + curr, 0);
         pi.push(1 - sum);
 
+        newPi = [...pi];
         
     }
 
@@ -415,6 +417,8 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
             npi.push(pi[i] * n);
             //newNpi.push(npi[i]);
         }
+
+        newNpi = [...npi];
     }
 
 
@@ -506,8 +510,7 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
             <h3>Початкова таблиця: </h3>
             <ShowTableContinious intervals={intervals} ni={ni} />
             {fixNi(ni)}
-            {newNiNpi = [...newNi]}
-            {newIntervalsNpi = [...newIntervals]}
+            
 
             <h3>Таблиця після об'єднання по ni: </h3>
             <ShowTableContinious intervals={newIntervals} ni={newNi} />
@@ -525,10 +528,10 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
                 {setPi(newIntervals, newNi)}
                 <h3>Знаходимо pi: </h3>
                 <ShowTableContinious intervals={newIntervals} ni={newNi} pi={pi}/>
-                {newPi = [...pi]}
+                
             </div>
             {setNpi(pi, newNi)}
-            {newNpi = [...npi]}
+            
 
 
             <h3>Знаходимо npi: </h3>
@@ -543,27 +546,38 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
             <ShowTableContinious intervals={newIntervalsNpi} ni={newNiNpi} pi={newPi} npi={newNpi}/>
 
 
-            <h4>
-                Параметр a: {(!_a) ? getA(newIntervals, newNi) : _a}
-            </h4>
 
-            <h4>
-                Параметр σ: {(!_sigma) ? getSigma(newIntervals, newNi) : _sigma}
-            </h4>
+            <div className="params">
+                <div className="params-1">
+                    <h4>Параметр a: </h4>
+                    <p>{(!_a) ? getA(newIntervals, newNi) : _a}</p>
 
-            <h4>
-                Рівень значущості α: {_alpha}
-            </h4>
+                    <h4>Параметр σ: </h4>
+                    <p>{(!_sigma) ? getSigma(newIntervals, newNi) : _sigma}</p>
 
-            <h4>
-                X емп: {getXEmp()}
-            </h4>
+                    
+                    <h4>Кількість невідомих s: </h4>
+                    <p>{s}</p>
 
-            <h4>
-                X крит: {getXCryt(s)}
-            </h4>
+                    
+                    <h4>Рівень значущості α: </h4>
+                    <p>{_alpha}</p>
+                </div>
+                
 
-            <div>
+                <div className="params-2">
+                    <h4>X емп: </h4>
+                    <p>{getXEmp()}</p>
+
+                    
+                    <h4>X крит: </h4>
+                    <p>{getXCryt(s)}</p>
+                </div>      
+            </div>
+                  
+            
+
+            <div className="conclusion">
                 {(getXEmp() < getXCryt(s)) ? (<h3>Гіпотеза прийнята</h3>) : (<h3>Гіпотеза не прийнята</h3>)}
             </div>
         </div>
