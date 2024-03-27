@@ -514,14 +514,6 @@ const NormalDistCheck = ({_a, _sigma, _alpha, intervals, ni, chiSquaredTable}) =
 
             <h3>Таблиця після об'єднання по ni: </h3>
             <ShowTableContinious intervals={newIntervals} ni={newNi} />
-            
-            <div>
-                a: {(!_a) ? getA(newIntervals, newNi) : _a}
-            </div>
-
-            <div>
-                sigma: {(!_sigma) ? getSigma(newIntervals, newNi) : _sigma}
-            </div>
         
 
             <div>
